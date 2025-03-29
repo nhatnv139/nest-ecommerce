@@ -13,5 +13,5 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
   password: process.env.DB_PASS || 'nemchua',
   database: process.env.DB_NAME || 'store',
   entities: [Admin, User],
-  synchronize: true, 
+  synchronize: false, 
 };

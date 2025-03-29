@@ -9,4 +9,9 @@ export class AdminRegisterDto {
 
   @MinLength(6)
   password: string;
+
+  @IsNotEmpty()
+  role: string | 1;
+
+
 }

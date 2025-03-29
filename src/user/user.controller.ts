@@ -18,6 +18,7 @@ import { User } from './user.entity';
   
     @Post('register')
     async register(@Body() dto: UserRegisterDto) {
+      
       return this.userService.register(dto);
     }
   

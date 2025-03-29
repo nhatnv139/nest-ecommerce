@@ -1,3 +1,9 @@
+export enum RoleType {
+  SUPER_ADMIN = 1,
+  ADMIN = 2,
+  USER = 3,
+}
+
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
 @Entity('admins')
@@ -14,6 +20,6 @@ export class Admin {
   @Column()
   password: string;
 
-  @Column({ default: 'moderator' })
-  role: 'super_admin' | 'moderator';
+  @Column({ type: 'enum', enum: RoleType, default: RoleType.ADMIN })
+  role: RoleType;
 }
