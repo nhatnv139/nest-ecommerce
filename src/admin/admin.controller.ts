@@ -5,12 +5,17 @@ import {
     Post,
     UseGuards,
     Request,
+    Param,
+    Put,
+    Delete,
+    Req,
   } from '@nestjs/common';
   import { AdminService } from './admin.service';
   import { AdminRegisterDto } from './dto/admin-register.dto';
   import { AdminLoginDto } from './dto/admin-login.dto';
   import { JwtAdminAuthGuard } from '../auth/jwt-admin-auth.guard';
 import { Admin } from './admin.entity';
+import { CreateAdminDto, UpdateAdminDto } from './dto/admin.dto';
   
   @Controller('admin')
   export class AdminController {
@@ -33,14 +38,42 @@ import { Admin } from './admin.entity';
     }
   
     @UseGuards(JwtAdminAuthGuard)
-    @Get('profile')
+    @Get('me')
     async getProfile(@Request() req) {
-      return req.admin;
+      return req.user
     }
+
+    // quản lý admin
     
     @UseGuards(JwtAdminAuthGuard)
-    @Get('admin')
+    @Get('admin-list')
     async getAllAdmins(): Promise<Admin[]> {
       return this.adminService.findAll();
     }
+
+    @UseGuards(JwtAdminAuthGuard)
+    @Get('admin-detail/:id')  // Sửa lại URL
+    async getAdminById(@Param('id') id: string) {
+      return this.adminService.findById(Number(id));
+    }
+  
+    @UseGuards(JwtAdminAuthGuard)
+    @Post('admin-create')
+    async createAdmin(@Req() req: any,@Body() data: CreateAdminDto) {
+      
+      return this.adminService.create(req,data);
+    }
+  
+    @UseGuards(JwtAdminAuthGuard)
+    @Put('admin-update/:id')
+    async updateAdmin(@Req() req: any,@Param('id') id: string, @Body() data: UpdateAdminDto) {
+      return this.adminService.update(req,Number(id), data);
+    }
+  
+    @UseGuards(JwtAdminAuthGuard)
+    @Delete('admin-delete/:id')
+    async deleteAdmin(@Param('id') id: string) {
+      return this.adminService.delete(Number(id));
+    }
+    
   }

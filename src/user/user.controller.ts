@@ -39,8 +39,11 @@ import { User } from './user.entity';
     }
     
     @UseGuards(JwtAuthGuard)
-    @Get('user')
+    @Get('list')
     async getAllUsers(): Promise<User[]> {
       return this.userService.findAll();
     }
+
+    
+
   }

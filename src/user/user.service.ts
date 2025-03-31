@@ -22,8 +22,6 @@ export class UserService {
   ) {}
 
   async register(dto: UserRegisterDto): Promise<User> {
-    console.log('Incoming DTO:', dto);
-
     try {
       // Check for missing fields
       if (!dto.email || !dto.password || !dto.name) {

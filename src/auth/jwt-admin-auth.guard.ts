@@ -8,7 +8,7 @@ import {Observable} from 'rxjs';
 
 
 @Injectable()
-export class JwtAdminAuthGuard extends AuthGuard("jwt-admin") {
+export class JwtAdminAuthGuard extends AuthGuard("jwt") {
     canActivate(
         context: ExecutionContext,
     ): boolean | Promise<boolean> | Observable<boolean> {
