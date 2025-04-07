@@ -25,6 +25,9 @@ export class JwtAuthGuard extends AuthGuard("jwt") {
         if (err || !user) {
             throw err || new UnauthorizedException(`${info}`);
         }
+        if (user.role) {
+            throw new UnauthorizedException('Access denied: user only');
+        }
         return user;
     }
 }

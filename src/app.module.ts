@@ -7,16 +7,22 @@ import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { CategoryModule } from './category/category.module';
 import { ProductsModule } from './product/product.module';
+import { ProductVariantModule } from './product-variant/product-variant.module';
+import { OrdersModule } from './order/order.module';
+import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
+    ScheduleModule.forRoot(),
     TypeOrmModule.forRoot(typeOrmConfig),
     AdminModule,
     UserModule,
     AuthModule,
     CategoryModule,
     ProductsModule,
+    ProductVariantModule,
+    OrdersModule,
   ],
 })
 export class AppModule {}

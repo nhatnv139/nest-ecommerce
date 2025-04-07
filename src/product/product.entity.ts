@@ -5,10 +5,11 @@ import {
     ManyToOne, 
     CreateDateColumn, 
     UpdateDateColumn, 
-    JoinColumn
+    JoinColumn,
+    OneToMany
   } from 'typeorm';
   import { Category } from 'src/category/category.entity';
-  
+  import { ProductVariant } from 'src/product-variant/product-variant.entity';
   @Entity("product")
   export class Product {
     @PrimaryGeneratedColumn()
@@ -29,6 +30,9 @@ import {
     @ManyToOne(() => Category, (category) => category.products)
     @JoinColumn({ name: 'category_id' })
     category: Category;
+
+    @OneToMany(() => ProductVariant, (variant) => variant.product)
+    variants: ProductVariant[];
   
     @Column({ name: 'image_url', nullable: true })
     imageUrl: string;
@@ -44,4 +48,5 @@ import {
   
     @UpdateDateColumn({ name: 'updated_at' })
     updatedAt: Date;
+      dailySales: any;
   }

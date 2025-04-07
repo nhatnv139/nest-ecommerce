@@ -4,6 +4,10 @@ import { User } from '../user/user.entity';
 import * as dotenv from 'dotenv';
 import { Category } from 'src/category/category.entity';
 import { Product } from 'src/product/product.entity';
+import { Order } from 'src/order/entities/order.entity';
+import { OrderItem } from 'src/order/entities/order-item.entity';
+import { ProductVariant } from 'src/product-variant/product-variant.entity';
+import { ProductDailySales } from 'src/share/entity/product-daily-sales.entity';
 
 dotenv.config();
 
@@ -14,6 +18,6 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
   username: process.env.DB_USER || 'root',
   password: process.env.DB_PASS || 'nemchua',
   database: process.env.DB_NAME || 'store',
-  entities: [Admin, User, Category,Product],
+  entities: [Admin, User, Category, Product,ProductVariant, Order, OrderItem,ProductDailySales],
   synchronize: true,
 };
