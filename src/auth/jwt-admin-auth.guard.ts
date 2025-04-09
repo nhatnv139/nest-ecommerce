@@ -21,7 +21,6 @@ export class JwtAdminAuthGuard extends AuthGuard("jwt") {
         if (err || !user) {
             throw err || new UnauthorizedException(`${info}`);
         }
-        console.log(1312,user.role);
         
         if (!user.role) {
             throw new UnauthorizedException('Access denied: Admins only');

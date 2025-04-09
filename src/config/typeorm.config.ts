@@ -8,6 +8,8 @@ import { Order } from 'src/order/entities/order.entity';
 import { OrderItem } from 'src/order/entities/order-item.entity';
 import { ProductVariant } from 'src/product-variant/product-variant.entity';
 import { ProductDailySales } from 'src/share/entity/product-daily-sales.entity';
+import { ShippingOrder } from 'src/shipping/entities/shipping-order.entity/shipping-order.entity';
+import { PaymentTransaction } from 'src/payment/payment.entity/payment-transaction.entity';
 
 dotenv.config();
 
@@ -18,6 +20,17 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
   username: process.env.DB_USER || 'root',
   password: process.env.DB_PASS || 'nemchua',
   database: process.env.DB_NAME || 'store',
-  entities: [Admin, User, Category, Product,ProductVariant, Order, OrderItem,ProductDailySales],
+  entities: [
+    Admin,
+    User,
+    Category,
+    Product,
+    ProductVariant,
+    Order,
+    OrderItem,
+    ProductDailySales,
+    ShippingOrder,
+    PaymentTransaction,
+  ],
   synchronize: true,
 };
