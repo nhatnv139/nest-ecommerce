@@ -1,4 +1,12 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Order } from 'src/order/entities/order.entity';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity('shipping_orders')
 export class ShippingOrder {
@@ -19,4 +27,8 @@ export class ShippingOrder {
 
   @CreateDateColumn()
   createdAt: Date;
+
+  @OneToOne(() => Order, (order) => order.ShippingOrder)
+  @JoinColumn()
+  order: Order;
 }

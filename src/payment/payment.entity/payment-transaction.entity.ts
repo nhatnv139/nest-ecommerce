@@ -1,5 +1,13 @@
 export class PaymentEntity {}
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, ManyToOne, JoinColumn } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  ManyToOne,
+  JoinColumn,
+  OneToOne,
+} from 'typeorm';
 import { Order } from '../../order/entities/order.entity';
 
 @Entity('payment_transactions')
@@ -10,9 +18,9 @@ export class PaymentTransaction {
   @Column()
   orderId: number;
 
-  @ManyToOne(() => Order)
-  @JoinColumn({ name: 'orderId' })
-  order: Order;
+  // @ManyToOne(() => Order)
+  // @JoinColumn({ name: 'orderId' })
+  // order: Order;
 
   @Column()
   paymentMethod: string;
@@ -28,4 +36,8 @@ export class PaymentTransaction {
 
   @CreateDateColumn()
   createdAt: Date;
+
+  @OneToOne(() => Order, (order) => order.payment)
+  @JoinColumn()
+  order: Order;
 }
