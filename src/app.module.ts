@@ -10,6 +10,10 @@ import { ProductsModule } from './product/product.module';
 import { ProductVariantModule } from './product-variant/product-variant.module';
 import { OrdersModule } from './order/order.module';
 import { ScheduleModule } from '@nestjs/schedule';
+import { ShippingModule } from './shipping.module';
+import { PaymentModule } from './payment.module';
+import { ShippingModule } from './shipping/shipping.module';
+import { PaymentModule } from './payment/payment.module';
 
 @Module({
   imports: [
@@ -23,6 +27,8 @@ import { ScheduleModule } from '@nestjs/schedule';
     ProductsModule,
     ProductVariantModule,
     OrdersModule,
+    ShippingModule,
+    PaymentModule,
   ],
 })
 export class AppModule {}
