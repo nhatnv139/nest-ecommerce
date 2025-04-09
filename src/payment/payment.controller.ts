@@ -1,14 +1,14 @@
 // src/payment/payment.controller.ts
 import { Controller, Post, Body } from '@nestjs/common';
 import { PaymentService } from './payment.service';
-import { OrderService } from '../order/order.service';
+import { OrdersService } from '../order/order.service';
 import { ShippingService } from '../shipping/shipping.service';
 
 @Controller('momo')
 export class PaymentController {
   constructor(
     private paymentService: PaymentService,
-    private orderService: OrderService,
+    private orderService: OrdersService,
     private shippingService: ShippingService,
   ) {}
 
