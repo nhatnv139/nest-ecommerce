@@ -5,12 +5,14 @@ import {
     Post,
     UseGuards,
     Request,
+    Query,
   } from '@nestjs/common';
   import { UserService } from './user.service';
   import { UserRegisterDto } from './dto/user-register.dto';
   import { UserLoginDto } from './dto/user-login.dto';
   import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { User } from './user.entity';
+import { PaginationDto } from '../common/dto/pagination.dto';
   
   @Controller('user')
   export class UserController {
@@ -40,8 +42,9 @@ import { User } from './user.entity';
     
     @UseGuards(JwtAuthGuard)
     @Get('list')
-    async getAllUsers(): Promise<User[]> {
-      return this.userService.findAll();
+    async getAllUsers(@Query() paginationDto: PaginationDto) {
+      const { page, limit } = paginationDto;
+      return this.userService.findAll(page, limit);
     }
 
     

@@ -14,6 +14,14 @@ import { User } from './user.entity';
 import { UserRegisterDto } from './dto/user-register.dto';
 import { UserLoginDto } from './dto/user-login.dto';
 
+export interface PaginatedResponse<T> {
+  items: T[];
+  total: number;
+  page: number;
+  limit: number;
+  totalPages: number;
+}
+
 @Injectable()
 export class UserService {
   constructor(
@@ -86,7 +94,25 @@ export class UserService {
   async findById(id: number): Promise<User | null> {
     return this.userRepository.findOneBy({ id });
   }
-  async findAll(): Promise<User[]> {
-    return this.userRepository.find();
+
+  async findAll(
+    page: number = 1,
+    limit: number = 10,
+  ): Promise<PaginatedResponse<User>> {
+    const skip = (page - 1) * limit;
+
+    const [items, total] = await this.userRepository.findAndCount({
+      skip,
+      take: limit,
+      order: { id: 'DESC' },
+    });
+
+    return {
+      items,
+      total,
+      page,
+      limit,
+      totalPages: Math.ceil(total / limit),
+    };
   }
 }
